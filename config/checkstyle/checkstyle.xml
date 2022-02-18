@@ -130,6 +130,7 @@
         <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
         <module name="UnnecessarySemicolonInEnumeration"/>
         <module name="UnnecessarySemicolonInTryWithResources"/>
+        <module name="UnusedLocalVariable"/>
 
         <!-- Imports checks -->
         <!-- https://checkstyle.org/config_imports.html -->

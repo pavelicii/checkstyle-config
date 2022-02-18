@@ -15,7 +15,7 @@ plugins {
 }
 
 checkstyle {
-    toolVersion "version"
+    toolVersion "9.3"
     sourceSets = [] // Don't check anything with Checkstyle during 'check' task
 }
 
@@ -33,7 +33,7 @@ plugins {
 }
 
 checkstyle {
-    toolVersion = "version"
+    toolVersion = "9.3"
     sourceSets = listOf() // Don't check anything with Checkstyle during 'check' task
 }
 
