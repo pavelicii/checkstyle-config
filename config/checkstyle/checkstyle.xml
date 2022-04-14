@@ -176,7 +176,6 @@
         <module name="ArrayTypeStyle"/>
         <module name="NoCodeInFile"/>
         <module name="OuterTypeFilename"/>
-        <module name="ParameterAssignment"/>
         <module name="UpperEll"/>
 
         <!-- Modifiers checks -->
