@@ -40,11 +40,15 @@
     <!-- Regexp checks -->
     <!-- https://checkstyle.sourceforge.io/checks/regexp/ -->
     <module name="RegexpMultiline">
-        <property name="format" value="^([ \t]{0,}@\w+[ \t]*(\(.*\))?)?[ \t]{0,}([a-z]+ )*(class|@?interface|enum)[^{]+\{[ \t]{0,}(?=\r?\n[ \t]{0,}(?!\})[^\s]|[^\r\n]*[^\s\}])"/>
+        <property name="format" value="\r?\n\r?\n+\Z"/>
+        <property name="message" value="File must not end with more than one newline."/>
+    </module>
+    <module name="RegexpMultiline">
+        <property name="format" value="^([ \t]{0,}@\w+[ \t]*(\(.*\))?)?[ \t]{0,}([a-z]+ )*(class|@?interface|enum|record)[^{]+\{[ \t]{0,}(?=\r?\n[ \t]{0,}(?!\})[^\s]|[^\r\n]*[^\s\}])"/>
         <property name="message" value="Leave empty line after Class definition."/>
     </module>
     <module name="RegexpMultiline">
-        <property name="format" value="(static|\)|->|\{)[ \t\r\n]*\{[ \t]*\r?\n[ \t]*$"/>
+        <property name="format" value="(?!.*\brecord\b[^{]*\)) (static|\)|->|\{)[ \t\r\n]*\{[ \t]*\r?\n[ \t]*$"/>
         <property name="message" value="Code block (except Class definition) has empty line at the start."/>
     </module>
     <module name="RegexpMultiline">
@@ -86,16 +90,17 @@
         <!-- https://checkstyle.sourceforge.io/checks/design/ -->
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
-        <module name="InterfaceIsType"/>
         <module name="MutableException"/>
         <module name="OneTopLevelClass"/>
         <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true"/>
             <property name="ignoreAnnotationCanonicalNames" value="org.junit.jupiter.api.io.TempDir"/>
         </module>
 
         <!-- Coding checks -->
         <!-- https://checkstyle.sourceforge.io/checks/coding/ -->
         <module name="AvoidDoubleBraceInitialization"/>
+        <module name="ConstructorsDeclarationGrouping"/>
         <module name="CovariantEquals"/>
         <module name="DeclarationOrder"/>
         <module name="DefaultComesLast"/>
@@ -148,6 +153,9 @@
                     org.mockito.Matchers.*,
                     org.mockito.ArgumentMatchers.*,
                     org.mockito.AdditionalMatchers.*,
+                    com.codeborne.selenide.Selenide.*,
+                    com.codeborne.selenide.Condition.*,
+                    com.codeborne.selenide.Selectors.*,
             "/>
         </module>
         <module name="IllegalImport"/>
@@ -162,10 +170,15 @@
         <module name="InvalidJavadocPosition"/>
         <module name="JavadocBlockTagLocation"/>
         <module name="JavadocContentLocation"/>
-        <module name="JavadocMethod"/>
+        <module name="JavadocMethod">
+            <property name="allowMissingParamTags" value="true"/>
+            <property name="allowMissingReturnTag" value="true"/>
+        </module>
         <module name="JavadocMissingLeadingAsterisk"/>
         <module name="JavadocMissingWhitespaceAfterAsterisk"/>
-        <module name="JavadocStyle"/>
+        <module name="JavadocStyle">
+            <property name="endOfSentenceFormat" value="([.?!:][ \t\n\r\f&lt;])|([.?!:]$)"/>
+        </module>
         <module name="JavadocTagContinuationIndentation"/>
         <module name="JavadocType"/>
         <module name="NonEmptyAtclauseDescription"/>
@@ -201,7 +214,9 @@
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
         <module name="MemberName"/>
-        <module name="MethodName"/>
+        <module name="MethodName">
+            <property name="format" value="^[a-z](_?[a-z]+[a-zA-Z0-9]*)*$"/>
+        </module>
         <module name="MethodTypeParameterName">
             <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
         </module>
@@ -209,13 +224,6 @@
         <module name="ParameterName"/>
         <module name="StaticVariableName"/>
         <module name="TypeName"/>
-
-        <!-- Size Violations checks -->
-        <!-- https://checkstyle.sourceforge.io/checks/sizes/ -->
-        <module name="ParameterNumber">
-            <property name="max" value="5"/>
-            <property name="ignoreOverriddenMethods" value="true"/>
-        </module>
 
         <!-- Whitespace checks -->
         <!-- https://checkstyle.sourceforge.io/checks/whitespace/ -->
